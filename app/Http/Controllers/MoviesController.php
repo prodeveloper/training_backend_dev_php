@@ -17,25 +17,43 @@ class MoviesController extends Controller
                 $movies=\App\Movie::all();
                 return view('movies',['movies'=>$movies]);
         }
+        
+        function getCreate()
+        {
+                return view('add_movie');
+        }
+        
+
         function postCreate()
         {
                 $movie= new \App\Movie();
-                $movie->title='Akirachix';
-                $movie->genre='awesome';
-                $movie->rating=5;
+                $movie->title=\Input::get('title');
+                $movie->genre=\Input::get('genre');
+                $movie->rating=\Input::get('rating');
                 $movie->save();
-                return "Record updated";
+                return \Redirect::to('movies');
         }
-        function getFind(){
-                $movie=\App\Movie::find(3);
-                return $movie;
+        function getFind($id){
+                $movie=\App\Movie::findOrFail($id);
+                $edit_link=url('movies/update/'.$id);
+                return view('movie',['movie'=>$movie, 'edit_link'=>$edit_link]);
         }
-        function postUpdate()
+        
+        function getUpdate($id)
         {
-                $movie= \App\Movie::find(5);
-                $movie->genre="Horror";
+                $movie= \App\Movie::findOrFail($id);
+                $update_url=url('movies/update/' . $id); 
+                return view('edit_movie',['movie'=>$movie,'update_url'=>$update_url]);
+        }
+        
+        function postUpdate($id)
+        {
+                $movie= \App\Movie::findOrFail($id);
+                $movie->title=\Input::get('title');
+                $movie->genre=\Input::get('genre');
+                $movie->rating=\Input::get('rating');
                 $movie->save();
-                return $movie;
+                return \Redirect::to('movies');
         }
         function postDelete()
         {
