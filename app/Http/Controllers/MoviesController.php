@@ -17,15 +17,22 @@ class MoviesController extends Controller
                 $movies=\App\Movie::all();
                 return view('movies',['movies'=>$movies]);
         }
-        
+
         function getCreate()
         {
                 return view('add_movie');
         }
-        
+
 
         function postCreate()
         {
+                $validator = \App\Movie::runValidator(\Input::all());
+
+                if ($validator->fails()) {
+                        return \Redirect::back()
+                                ->withErrors($validator)
+                                ->withInput();
+                }
                 $movie= new \App\Movie();
                 $movie->title=\Input::get('title');
                 $movie->genre=\Input::get('genre');
@@ -38,16 +45,23 @@ class MoviesController extends Controller
                 $edit_link=url('movies/update/'.$id);
                 return view('movie',['movie'=>$movie, 'edit_link'=>$edit_link]);
         }
-        
+
         function getUpdate($id)
         {
                 $movie= \App\Movie::findOrFail($id);
                 $update_url=url('movies/update/' . $id); 
                 return view('edit_movie',['movie'=>$movie,'update_url'=>$update_url]);
         }
-        
+
         function postUpdate($id)
         {
+                $validator = \App\Movie::runValidator(\Input::all());
+
+                if ($validator->fails()) {
+                        return \Redirect::back()
+                                ->withErrors($validator)
+                                ->withInput();
+                }
                 $movie= \App\Movie::findOrFail($id);
                 $movie->title=\Input::get('title');
                 $movie->genre=\Input::get('genre');
