@@ -9,6 +9,11 @@ use App\Http\Controllers\Controller;
 
 class MoviesController extends Controller
 {
+        function __construct()
+        {
+                $this->middleware('auth');
+        }
+        
         function getIndex()
         {
                 // $movies = \App\Movie::where('title','=','Shuga')->get();

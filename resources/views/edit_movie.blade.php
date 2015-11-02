@@ -1,4 +1,8 @@
-<form action="{{$update_url}}" method="post" accept-charset="utf-8">
+@extends('layouts.base')
+
+@section('content')
+<div class="row">
+<form action="{{$update_url}}" method="post" accept-charset="utf-8" class="form">
 <p><label for="title">title</label><input type="text" name="title" value="{{$movie->title}}" id="title"> {{$errors->first('title')}}
 </p>       
 <p><label for="genre">genre</label><input type="text" name="genre" value="{{$movie->genre}}" id="genre">{{$errors->first('genre')}}
@@ -10,3 +14,5 @@
 
         <p><input type="submit" value="Update Movie"></p>
 </form>
+</div>
+@endsection

@@ -1,5 +1,4 @@
 @extends('layouts.base')
-
 @section('content')
-       <p> This is an about us page</p>
+<p>Welcome to our home page</p>
 @endsection

@@ -1,4 +1,7 @@
-<table border="0" cellspacing="5" cellpadding="5">
+@extends('layouts.base')
+
+@section('content')
+<table border="0" cellspacing="5" cellpadding="5" class="table">
         <tr>
         <th>Title</th>
         <th>Genre</th>
@@ -14,3 +17,4 @@
         </tr>
         @endforeach
 </table>
+@endsection

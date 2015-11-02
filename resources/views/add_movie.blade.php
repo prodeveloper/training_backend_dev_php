@@ -1,3 +1,6 @@
+@extends('layouts.base')
+
+@section('content')
 <form action="{{url('movies/create')}}" method="post" accept-charset="utf-8">
 <p><label for="title">title</label><input type="text" name="title" value="" id="title"> {{$errors->first('title')}}
 </p>       
@@ -9,3 +12,4 @@
 
         <p><input type="submit" value="Save New Movie"></p>
 </form>
+@endsection

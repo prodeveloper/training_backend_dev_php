@@ -10,6 +10,7 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
 class AuthController extends Controller
 {
+    protected $redirectPath = '/movies';
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
